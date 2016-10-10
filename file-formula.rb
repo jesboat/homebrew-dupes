@@ -8,6 +8,8 @@ class FileFormula < Formula
 
   head "https://github.com/file/file.git"
 
+  revision 1
+
   bottle do
     cellar :any
     sha256 "23e98e27a13e15e5f24c7c52fe7d6e0c49ec2cd53e572f4f2823a99af69eb593" => :el_capitan
@@ -17,14 +19,10 @@ class FileFormula < Formula
 
   keg_only :provided_by_osx
 
-  depends_on "libmagic"
-
   def install
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
-    system "make", "install-exec"
-    system "make", "-C", "doc", "install-man1"
-    rm_r lib
+    system "make", "install"
   end
 
   test do
